@@ -37,7 +37,7 @@ const displayPets = (pets) => {
 
     const card = document.createElement("div");
     card.innerHTML = `
-    <div class="card w-full shadow-xl p-5 ">
+    <div class="w-full p-5 border border-teal-100 hover:border-teal-400 rounded-lg">
     <div class="">
     <img class="rounded-xl mb-5" src="${pet.image}"/>
 
@@ -64,9 +64,9 @@ const displayPets = (pets) => {
     </div>
 
     <div class= "flex justify-between px-1 mt-7">
-    <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500" onclick="getdata('${pet.image}')"><img class="w-5 h-5 " src="https://img.icons8.com/?size=256w&id=581&format=png"/></button>
+    <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500" onclick="getImagedata('${pet.image}')"><img class="w-5 h-5 " src="https://img.icons8.com/?size=256w&id=581&format=png"/></button>
     <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500">Adopt</button>
-    <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500">Details</button>
+    <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500" onclick="loadModel(${pet.petId})">Details</button>
     </div>
     
   </div>
@@ -77,16 +77,66 @@ const displayPets = (pets) => {
   });
 };
 
-const getdata = (imageData) => {
-  console.log(imageData);
+const getImagedata = (imageData) => {
+  // console.log(imageData);
   const likeContainer = document.getElementById("like-container");
-  const div = document.createElement('div');
+  const div = document.createElement("div");
   // div.classList.add="h-1/2"
 
   div.innerHTML = `
   <img class="w-full rounded-md" src="${imageData}"/>
   `;
   likeContainer.append(div);
+};
+const loadModel = async (id) => {
+  console.log(id);
+  const url = `https://openapi.programming-hero.com/api/peddy/pet/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayModel(data.petData);
+};
+const displayModel = (details) => {
+  console.log(details);
+  const modalContent = document.getElementById("modalcontent");
+  document.getElementById("showModal").click();
+
+  modalContent.innerHTML = `
+  <div class="flex justify-center mb-3">
+  <img class="rounded-lg" src="${details.image}"/>
+  </div>
+  <h1 class="font-extrabold text-xl mb-3">${details.pet_name}</h1>
+  <div class="grid grid-cols-2 gap-1 mb-3">
+      <div class="flex items-center gap-2">
+    <img class="w-5 h-5" src="https://img.icons8.com/?size=256w&id=2740&format=png"/>
+    <p>Breed: ${details.breed}</p>
+    </div>
+    
+    <div class="flex items-center gap-2">
+    <img class="w-5 h-5" src="https://img.icons8.com/?size=256w&id=UTe6yKq2hvHK&format=png"/>
+    <p>Birth: ${details.date_of_birth}</p>
+    </div>
+
+    <div class="flex items-center gap-2">
+    <img class="w-5 h-5" src="https://img.icons8.com/?size=256w&id=1665&format=png"/>
+    <p>Gender: ${details.gender}</p>
+    </div>
+
+    <div class="flex items-center gap-2">
+    <img class="w-5 h-5" src="https://img.icons8.com/?size=256w&id=7172&format=png"/>
+    <p>Price: ${details.price}$</p>
+    </div>
+
+    <div class="flex items-center gap-2">
+    <img class="w-5 h-5" src="https://img.icons8.com/?size=256w&id=1665&format=png"/>
+    <p>Vaccinated status: ${details.vaccinated_status}</p>
+    </div>
+  </div>
+
+  <p class="font-bold text-sm mb-3">Details Information</p>
+
+  <p>${details.pet_details}</p>
+  
+  `;
 };
 
 loadCategory();

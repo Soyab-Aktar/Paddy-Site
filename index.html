@@ -110,20 +110,41 @@
             <a class="text-2xl font-bold">Best Deals For you</a>
           </div>
           <div class="flex-none">
-            <button class="btn bg-teal-700 font-bold text-white">Sort by Price</button>
+            <button class="btn bg-teal-700 font-bold text-white">
+              Sort by Price
+            </button>
           </div>
         </div>
       </section>
       <!--? PETS SECTION -->
       <section>
-        <div class="flex gap-2">
-          <div id="pets-container" class="grid grid-cols-3 gap-2 ">
-  
-          </div>
-          <div id="like-container" class="border border-teal-800 w-5/12 h-fit rounded-lg grid grid-cols-2 p-3 gap-1">
-            
-          </div>
+        <div class="flex flex-col md:flex-row gap-2">
+          <div
+            id="pets-container"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2"
+          ></div>
+          <div
+            id="like-container"
+            class="border border-teal-100 hover:border-teal-400 md:w-5/12 h-fit rounded-lg grid grid-cols-2 p-3 gap-1"
+          ></div>
         </div>
+      </section>
+      <!--? MODAL SECTION -->
+      <section>
+        
+        <button id="showModal" class="btn hidden" onclick="my_modal_5.showModal()">open modal</button>
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+          <div class="modal-box border border-teal-500">
+            <div id="modalcontent">
+
+            </div>
+            <div class="modal-action">
+              <form method="dialog" class="w-full">
+                <button class="btn w-full border-teal-100 hover:bg-white hover:border-teal-500 text-teal-700">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </section>
     </main>
 
