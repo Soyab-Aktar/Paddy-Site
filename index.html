@@ -24,14 +24,17 @@
       .lato-font {
         font-family: "Lato", serif;
       }
+      .deep-green{
+        background-color: #0E7A81;
+      }
     </style>
 
   </head>
   <body class="lato-font">
     <!--^ HEADER -->
-    <header class="max-w-screen-xl mx-auto mb-14">
+    <header class="fixed top-0 left-0 w-full z-20">
         <!--* NAVBAR -->
-        <nav>
+        <nav class="max-w-screen-xl mx-auto mb-14">
             <div class="navbar bg-base-100">
                 <div class="navbar-start">
                     <div class="flex items-center gap-2">
@@ -55,5 +58,41 @@
               </div>
         </nav>
     </header>
+    <!--^ MAIN -->
+    <main class="mt-28">
+        <!--? HERO PAGE -->
+        <section class="mb-20">
+            <div class="hero">
+                <div class="hero-content text-center">
+                  <div class="md:w-1/2">
+                    <h1 class="text-2xl font-bold text-gray-500 mb-6">Bringing Families Together ❤️‍🔥 </h1>
+                    <h1 class="text-5xl font-bold">Your Path to Adoption Starts Here</h1>
+                    <p class="py-6">
+                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.
+                    </p>
+                    <button class="btn deep-green font-bold text-xl text-white mb-11">View More</button>
+                    <div>
+                        <img src="images/pet.webp" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </section>
+        <!--? CATEGORY SECTION -->
+        <section>
+            <div class="w-5/12 mx-auto text-center">
+                <h1 class="font-bold text-4xl mb-6">Adopt  Your  Best Friend</h1>
+                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+            </div>
+            <div id="category-container">
+
+            </div>
+        </section>
+
+    </main>
+
+
+
+    <script src="js/pet.js"></script>
   </body>
 </html>
