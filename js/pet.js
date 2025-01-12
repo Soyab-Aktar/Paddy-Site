@@ -28,30 +28,16 @@ const loadPets = () => {
     .then((data) => displayPets(data.pets))
     .catch((error) => console.log(error));
 };
-// //*Add Likes Pet
-const addLikes = (id) => {
-fetch('https://openapi.programming-hero.com/api/peddy/pets')
-.then(Response=>Response.json())
-.then((data)=>{
-    const container = document.getElementById("like-container");
-    const image = document.createElement("div");
-    image.classList.add="w-full"
-    image.innerHTML = `
-      <img src="${id.image}" />
-      `;
-      container.append(image);
-})
-};
 
 //*Display Pets
 const displayPets = (pets) => {
   const petsContainer = document.getElementById("pets-container");
   pets.forEach((pet) => {
-    console.log(pet);
+    // console.log(pet);
 
     const card = document.createElement("div");
     card.innerHTML = `
-    <div class="card w-full shadow-xl p-5">
+    <div class="card w-full shadow-xl p-5 ">
     <div class="">
     <img class="rounded-xl mb-5" src="${pet.image}"/>
 
@@ -77,8 +63,10 @@ const displayPets = (pets) => {
     <p>Price: ${pet.price}$</p>
     </div>
 
-    <div>
-    <img id="like-btn${pet.petId}" onclick="addLikes(${pet.petId})" class="w-5 h-5 cursor-pointer" src="https://img.icons8.com/?size=256w&id=24816&format=png"/>
+    <div class= "flex justify-between px-1 mt-7">
+    <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500" onclick="getdata('${pet.image}')"><img class="w-5 h-5 " src="https://img.icons8.com/?size=256w&id=581&format=png"/></button>
+    <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500">Adopt</button>
+    <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500">Details</button>
     </div>
     
   </div>
@@ -87,6 +75,18 @@ const displayPets = (pets) => {
 
     petsContainer.append(card);
   });
+};
+
+const getdata = (imageData) => {
+  console.log(imageData);
+  const likeContainer = document.getElementById("like-container");
+  const div = document.createElement('div');
+  // div.classList.add="h-1/2"
+
+  div.innerHTML = `
+  <img class="w-full rounded-md" src="${imageData}"/>
+  `;
+  likeContainer.append(div);
 };
 
 loadCategory();
