@@ -131,16 +131,41 @@
       </section>
       <!--? MODAL SECTION -->
       <section>
-        
-        <button id="showModal" class="btn hidden" onclick="my_modal_5.showModal()">open modal</button>
+        <button
+          id="showModal"
+          class="btn hidden"
+          onclick="my_modal_5.showModal()"
+        >
+          open modal
+        </button>
         <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
           <div class="modal-box border border-teal-500">
-            <div id="modalcontent">
-
-            </div>
+            <div id="modalcontent"></div>
             <div class="modal-action">
               <form method="dialog" class="w-full">
-                <button class="btn w-full border-teal-100 hover:bg-white hover:border-teal-500 text-teal-700">Close</button>
+                <button
+                  class="btn w-full border-teal-100 hover:bg-white hover:border-teal-500 text-teal-700"
+                >
+                  Close
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      </section>
+      <!--? MODAL CONGRATES SECTION -->
+      <section>
+        <!-- Open the modal using ID.showModal() method -->
+        <button id="congratesModal" class="btn hidden" onclick="my_modal_1.showModal()">open modal</button>
+        <dialog id="my_modal_1" class="modal">
+          <div class="modal-box text-center border border-teal-500" id="modal-content">
+            <div class="flex justify-center mb-6"><img class="w-1/2" src="https://cdn-icons-png.flaticon.com/512/1807/1807570.png" alt=""></div>
+            <h1 class="font-extrabold text-3xl mb-2">Congrates</h1>
+            <p class="font-semibold mb-3">Adoption Process is Start For You</p>
+            <div id="countdown"></div>
+            <div class="modal-action">
+              <form method="dialog">
+                <button class="btn hidden">Close</button>
               </form>
             </div>
           </div>

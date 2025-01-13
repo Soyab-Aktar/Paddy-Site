@@ -65,7 +65,7 @@ const displayPets = (pets) => {
 
     <div class= "flex justify-between px-1 mt-7">
     <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500" onclick="getImagedata('${pet.image}')"><img class="w-5 h-5 " src="https://img.icons8.com/?size=256w&id=581&format=png"/></button>
-    <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500">Adopt</button>
+    <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500" onclick="LoadCongratesModal(${pet.petId})">Adopt</button>
     <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500" onclick="loadModel(${pet.petId})">Details</button>
     </div>
     
@@ -77,6 +77,7 @@ const displayPets = (pets) => {
   });
 };
 
+//* Insert Image to a new Container
 const getImagedata = (imageData) => {
   // console.log(imageData);
   const likeContainer = document.getElementById("like-container");
@@ -88,6 +89,7 @@ const getImagedata = (imageData) => {
   `;
   likeContainer.append(div);
 };
+//*Load Modal by using Details Button
 const loadModel = async (id) => {
   console.log(id);
   const url = `https://openapi.programming-hero.com/api/peddy/pet/${id}`;
@@ -95,6 +97,7 @@ const loadModel = async (id) => {
   const data = await res.json();
   displayModel(data.petData);
 };
+//*Display Modal by using Details Button
 const displayModel = (details) => {
   console.log(details);
   const modalContent = document.getElementById("modalcontent");
@@ -137,6 +140,53 @@ const displayModel = (details) => {
   <p>${details.pet_details}</p>
   
   `;
+};
+//*Load Modal by using Adopt Button
+const LoadCongratesModal = async (id) => {
+  console.log(id);
+  const url = `https://openapi.programming-hero.com/api/peddy/pet/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayCongratesModal(data.petData);
+};
+let intervalId = null;
+let timeoutId = null;
+
+const displayCongratesModal = (details) => {
+  if (intervalId) {
+    clearInterval(intervalId);
+    intervalId = null;
+  }
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+    timeoutId = null;
+  }
+  document.getElementById("congratesModal").click();
+  const content = document.getElementById("countdown");
+  
+  let counter = 3;
+  
+  content.innerHTML = `<h1 class = "font-extrabold text-5xl">${counter}</h1>`;
+  
+  intervalId = setInterval(() => {
+    counter--;
+    console.log(counter);
+    
+    if (counter > 0) {
+      content.innerHTML = `<h1 class = "font-extrabold text-5xl">${counter}</h1>`;
+    } else {
+      // Clear interval when counter reaches 0
+      clearInterval(intervalId);
+      intervalId = null;
+      console.log("Counter stopped!");
+    }
+  }, 1000);
+
+  timeoutId = setTimeout(() => {
+    const modal = document.getElementById("my_modal_1");
+    modal.close();
+    timeoutId = null;
+  }, 3000);
 };
 
 loadCategory();
