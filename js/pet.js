@@ -13,13 +13,20 @@ const displayCategory = (categories) => {
 
     const btnContainer = document.createElement("div");
     btnContainer.innerHTML = `
-        <button class="flex items-center justify-center gap-2  px-4 py-2 rounded-full bg-sky-100 border border-teal-600 btn-wide w-full">
+        <button id="categoryBTN" onclick="displayCategoryContent('${item.category}')" class=" flex items-center justify-center gap-2  px-4 py-2 rounded-full border border-teal-300 btn-wide w-full">
           <img class="w-12 h-12" src="${item.category_icon}" />
           <span class="font-medium text-teal-900">${item.category}</span>
         </button>
         `;
     categoryContainer.append(btnContainer);
   });
+};
+//* Display Category Based Content
+const displayCategoryContent = (id) => {
+  fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+    .then((Response) => Response.json())
+    .then((data) => displayPets(data.data))
+    .catch((error) => console.log(error));
 };
 //*Load Pets
 const loadPets = () => {
@@ -32,6 +39,22 @@ const loadPets = () => {
 //*Display Pets
 const displayPets = (pets) => {
   const petsContainer = document.getElementById("pets-container");
+  petsContainer.innerHTML = "";
+  if (pets.length === 0) {
+    petsContainer.classList.remove("grid");
+    
+    petsContainer.innerHTML = `
+    <div class= "min-h-[300px] flex flex-col gap-5 justify-center items-center">
+    <img src="images/error.webp" />
+    <h3 class="font-bold">Oops!! No Content Here</h3>
+    </div>
+    `;
+    return;
+  }
+  else{
+    
+    petsContainer.classList.add("grid");
+  }
   pets.forEach((pet) => {
     // console.log(pet);
 
@@ -79,10 +102,10 @@ const displayPets = (pets) => {
 
 //* Insert Image to a new Container
 const getImagedata = (imageData) => {
-  // console.log(imageData);
+  const textData = document.getElementById("path");
+  textData.classList.add("hidden");
   const likeContainer = document.getElementById("like-container");
   const div = document.createElement("div");
-  // div.classList.add="h-1/2"
 
   div.innerHTML = `
   <img class="w-full rounded-md" src="${imageData}"/>
@@ -163,15 +186,15 @@ const displayCongratesModal = (details) => {
   }
   document.getElementById("congratesModal").click();
   const content = document.getElementById("countdown");
-  
+
   let counter = 3;
-  
+
   content.innerHTML = `<h1 class = "font-extrabold text-5xl">${counter}</h1>`;
-  
+
   intervalId = setInterval(() => {
     counter--;
     console.log(counter);
-    
+
     if (counter > 0) {
       content.innerHTML = `<h1 class = "font-extrabold text-5xl">${counter}</h1>`;
     } else {
