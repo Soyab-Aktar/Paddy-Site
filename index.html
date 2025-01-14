@@ -61,7 +61,7 @@
       </nav>
     </header>
     <!--^ MAIN -->
-    <main class="mt-28 max-w-screen-xl mx-auto">
+    <main class="my-28 max-w-screen-xl mx-auto">
       <!--? HERO PAGE -->
       <section class="mb-20">
         <div class="hero">
@@ -125,7 +125,8 @@
           ></div>
           <div
             id="like-container"
-            class="border border-teal-100 hover:border-teal-400 md:w-5/12 h-fit rounded-lg grid grid-cols-2 p-3 gap-1 text-teal-100 hover:text-teal-400">
+            class="border border-teal-100 hover:border-teal-400 md:w-5/12 h-fit rounded-lg grid grid-cols-2 p-3 gap-1 text-teal-100 hover:text-teal-400"
+          >
             <h4 id="path" class="">Press the heart icon to add images.</h4>
           </div>
         </div>
@@ -157,10 +158,25 @@
       <!--? MODAL CONGRATES SECTION -->
       <section>
         <!-- Open the modal using ID.showModal() method -->
-        <button id="congratesModal" class="btn hidden" onclick="my_modal_1.showModal()">open modal</button>
+        <button
+          id="congratesModal"
+          class="btn hidden"
+          onclick="my_modal_1.showModal()"
+        >
+          open modal
+        </button>
         <dialog id="my_modal_1" class="modal">
-          <div class="modal-box text-center border border-teal-500" id="modal-content">
-            <div class="flex justify-center mb-6"><img class="w-1/2" src="https://cdn-icons-png.flaticon.com/512/1807/1807570.png" alt=""></div>
+          <div
+            class="modal-box text-center border border-teal-500"
+            id="modal-content"
+          >
+            <div class="flex justify-center mb-6">
+              <img
+                class="w-1/2"
+                src="https://cdn-icons-png.flaticon.com/512/1807/1807570.png"
+                alt=""
+              />
+            </div>
             <h1 class="font-extrabold text-3xl mb-2">Congrates</h1>
             <p class="font-semibold mb-3">Adoption Process is Start For You</p>
             <div id="countdown"></div>
@@ -173,6 +189,42 @@
         </dialog>
       </section>
     </main>
+<footer class="bg-black">
+  <section class="footer  text-white p-10 justify-between max-w-screen-xl mx-auto pb-28">
+    <nav>
+      <div class="flex items-center gap-2 mb-2">
+        <div>
+          <img src="images/logo.webp" alt="" />
+        </div>
+        <h2 class="font-extrabold text-3xl">Peddy</h2>
+      </div>
+      <a class="link link-hover text-gray-300 font-light">Location: av. Washington 165, NY CA 54003</a>
+      <a class="link link-hover text-gray-300 font-light">Phone: +31 85 964 47 25</a>
+      <a class="link link-hover text-gray-300 font-light">Email: info@yourdomain.com</a>
+      <a class="link link-hover text-gray-300 font-light">Openings hours: 9.00 AM - 5.00 PM</a>
+      <div class="flex gap-2 mt-2 items-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" class="w-8 h-8">
+        <img src="https://cdn-icons-png.flaticon.com/512/5969/5969020.png" class="w-8 h-8">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" class="w-8 h-8">
+        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" class="w-8 h-8">
+      </div>
+    </nav>
+    <nav>
+      <h6 class="font-bold text-white">Useful Links</h6>
+      <a class="link link-hover text-gray-300 font-light">Home</a>
+      <a class="link link-hover text-gray-300 font-light">About Us</a>
+      <a class="link link-hover text-gray-300 font-light">Animals</a>
+      <a class="link link-hover text-gray-300 font-light">Foundation</a>
+      <a class="link link-hover text-gray-300 font-light">Contact</a>
+    </nav>
+    <nav>
+      <h6 class="font-bold text-white">Drop a Message</h6>
+      <input type="email" placeholder="Enter Your Email" class="input input-bordered w-full bg-gray-600" />
+      <button class="btn w-full bg-teal-600 border-teal-500 hover:bg-teal-300 text-white">Subscribe</button>
+    </nav>
+  </section>
+
+</footer>
 
     <script src="js/pet.js"></script>
   </body>

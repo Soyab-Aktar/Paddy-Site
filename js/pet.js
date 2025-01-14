@@ -9,17 +9,28 @@ const loadCategory = () => {
 const displayCategory = (categories) => {
   const categoryContainer = document.getElementById("category-container");
   categories.forEach((item) => {
-    // console.log(item);
+    console.log(item.id);
 
     const btnContainer = document.createElement("div");
     btnContainer.innerHTML = `
-        <button id="categoryBTN" onclick="displayCategoryContent('${item.category}')" class=" flex items-center justify-center gap-2  px-4 py-2 rounded-full border border-teal-300 btn-wide w-full">
+        <button id='categoryBTN${item.id}' onclick="handleButton('categoryBTN${item.id}'); displayCategoryContent('${item.category}')" class=" flex items-center justify-center gap-2  px-4 py-2 rounded-full border border-teal-300 btn-wide w-full">
           <img class="w-12 h-12" src="${item.category_icon}" />
           <span class="font-medium text-teal-900">${item.category}</span>
         </button>
         `;
     categoryContainer.append(btnContainer);
   });
+};
+//* Handle Button Function
+const handleButton = (buttonId) => {
+  const buttons = document.querySelectorAll("#category-container button");
+  buttons.forEach((button) =>
+    button.classList.remove("bg-teal-100")
+  );
+  const clickedButton = document.getElementById(buttonId);
+  if (clickedButton) {
+    clickedButton.classList.add("bg-teal-100",);
+  }
 };
 //* Display Category Based Content
 const displayCategoryContent = (id) => {
@@ -42,7 +53,7 @@ const displayPets = (pets) => {
   petsContainer.innerHTML = "";
   if (pets.length === 0) {
     petsContainer.classList.remove("grid");
-    
+
     petsContainer.innerHTML = `
     <div class= "min-h-[300px] flex flex-col gap-5 justify-center items-center">
     <img src="images/error.webp" />
@@ -50,9 +61,7 @@ const displayPets = (pets) => {
     </div>
     `;
     return;
-  }
-  else{
-    
+  } else {
     petsContainer.classList.add("grid");
   }
   pets.forEach((pet) => {
