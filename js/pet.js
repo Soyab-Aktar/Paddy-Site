@@ -9,8 +9,6 @@ const loadCategory = () => {
 const displayCategory = (categories) => {
   const categoryContainer = document.getElementById("category-container");
   categories.forEach((item) => {
-    console.log(item.id);
-
     const btnContainer = document.createElement("div");
     btnContainer.innerHTML = `
         <button id='categoryBTN${item.id}' onclick="handleButton('categoryBTN${item.id}'); displayLoad() ;displayCategoryContent('${item.category}')" class=" flex items-center justify-center gap-2  px-4 py-2 rounded-full border border-teal-300 btn-wide w-full">
@@ -25,8 +23,8 @@ const displayCategory = (categories) => {
 const displayLoad = () => {
   const petsContainer = document.getElementById("pets-container");
   petsContainer.classList.remove("grid");
-  petsContainer.classList.add("flex","justify-center","items-center");
-  petsContainer.innerHTML=`
+  petsContainer.classList.add("flex", "justify-center", "items-center");
+  petsContainer.innerHTML = `
   <span class="loading loading-infinity loading-lg"></span>
   
   `;
@@ -45,7 +43,10 @@ const displayCategoryContent = (id) => {
   setTimeout(() => {
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
       .then((Response) => Response.json())
-      .then((data) => displayPets(data.data))
+      .then((data) => {
+        displayPets(data.data);
+        document.getElementById('sortBTN').addEventListener("click",() => sortPrice(data.data));
+      })
       .catch((error) => console.log(error));
   }, 2000);
 };
@@ -53,9 +54,23 @@ const displayCategoryContent = (id) => {
 const loadPets = () => {
   fetch("https://openapi.programming-hero.com/api/peddy/pets")
     .then((Response) => Response.json())
-    .then((data) => displayPets(data.pets))
+    .then((data) => {
+      displayPets(data.pets);
+      document.getElementById('sortBTN').addEventListener("click",() => sortPrice(data.pets));
+      
+    })
     .catch((error) => console.log(error));
 };
+//*Sort Pets by Price (High to Low)
+const sortPrice = (pets) => {
+  pets.forEach((pet) => {
+    console.log(pet.price);
+  });
+  const sortedPets = pets.sort((a, b) => b.price - a.price);
+  console.log(sortedPets);
+  displayPets(sortedPets);
+};
+
 
 //*Display Pets
 const displayPets = (pets) => {
@@ -75,7 +90,7 @@ const displayPets = (pets) => {
     petsContainer.classList.add("grid");
   }
   pets.forEach((pet) => {
-    const dataCheck = ["breed", "date_of_birth", "gender"];
+    const dataCheck = ["breed", "date_of_birth", "gender","price"];
     dataCheck.forEach((field) => {
       if (pet[field] === undefined || pet[field] === null) {
         pet[field] = "Not Available";
@@ -110,7 +125,7 @@ const displayPets = (pets) => {
     <p>Price: ${pet.price}$</p>
     </div>
 
-    <div class= "flex justify-between px-1 mt-7">
+    <div class= "flex justify-between mt-7">
     <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500" onclick="getImagedata('${pet.image}')"><img class="w-5 h-5 " src="https://img.icons8.com/?size=256w&id=581&format=png"/></button>
     <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500" onclick="LoadCongratesModal(${pet.petId})">Adopt</button>
     <button class= " btn cursor-pointer border-teal-100 hover:bg-white hover:border-teal-500" onclick="loadModel(${pet.petId})">Details</button>
