@@ -24,12 +24,10 @@ const displayCategory = (categories) => {
 //* Handle Button Function
 const handleButton = (buttonId) => {
   const buttons = document.querySelectorAll("#category-container button");
-  buttons.forEach((button) =>
-    button.classList.remove("bg-teal-100")
-  );
+  buttons.forEach((button) => button.classList.remove("bg-teal-100"));
   const clickedButton = document.getElementById(buttonId);
   if (clickedButton) {
-    clickedButton.classList.add("bg-teal-100",);
+    clickedButton.classList.add("bg-teal-100");
   }
 };
 //* Display Category Based Content
@@ -65,7 +63,12 @@ const displayPets = (pets) => {
     petsContainer.classList.add("grid");
   }
   pets.forEach((pet) => {
-    // console.log(pet);
+    const dataCheck = ["breed", "date_of_birth", "gender"];
+    dataCheck.forEach((field) => {
+      if (pet[field] === undefined || pet[field] === null) {
+        pet[field] = "Not Available";
+      }
+    });
 
     const card = document.createElement("div");
     card.innerHTML = `
@@ -131,9 +134,15 @@ const loadModel = async (id) => {
 };
 //*Display Modal by using Details Button
 const displayModel = (details) => {
-  console.log(details);
   const modalContent = document.getElementById("modalcontent");
   document.getElementById("showModal").click();
+
+  const dataCheck = ["breed", "date_of_birth", "gender"];
+  dataCheck.forEach((field) => {
+    if (details[field] === undefined || details[field] === null) {
+      details[field] = "Not Available";
+    }
+  });
 
   modalContent.innerHTML = `
   <div class="flex justify-center mb-3">
