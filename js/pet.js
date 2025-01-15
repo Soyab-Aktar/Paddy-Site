@@ -13,13 +13,23 @@ const displayCategory = (categories) => {
 
     const btnContainer = document.createElement("div");
     btnContainer.innerHTML = `
-        <button id='categoryBTN${item.id}' onclick="handleButton('categoryBTN${item.id}'); displayCategoryContent('${item.category}')" class=" flex items-center justify-center gap-2  px-4 py-2 rounded-full border border-teal-300 btn-wide w-full">
+        <button id='categoryBTN${item.id}' onclick="handleButton('categoryBTN${item.id}'); displayLoad() ;displayCategoryContent('${item.category}')" class=" flex items-center justify-center gap-2  px-4 py-2 rounded-full border border-teal-300 btn-wide w-full">
           <img class="w-12 h-12" src="${item.category_icon}" />
           <span class="font-medium text-teal-900">${item.category}</span>
         </button>
         `;
     categoryContainer.append(btnContainer);
   });
+};
+//*Display Loading
+const displayLoad = () => {
+  const petsContainer = document.getElementById("pets-container");
+  petsContainer.classList.remove("grid");
+  petsContainer.classList.add("flex","justify-center","items-center");
+  petsContainer.innerHTML=`
+  <span class="loading loading-infinity loading-lg"></span>
+  
+  `;
 };
 //* Handle Button Function
 const handleButton = (buttonId) => {
@@ -32,10 +42,12 @@ const handleButton = (buttonId) => {
 };
 //* Display Category Based Content
 const displayCategoryContent = (id) => {
-  fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
-    .then((Response) => Response.json())
-    .then((data) => displayPets(data.data))
-    .catch((error) => console.log(error));
+  setTimeout(() => {
+    fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+      .then((Response) => Response.json())
+      .then((data) => displayPets(data.data))
+      .catch((error) => console.log(error));
+  }, 2000);
 };
 //*Load Pets
 const loadPets = () => {
